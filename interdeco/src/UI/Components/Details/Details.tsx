@@ -27,9 +27,10 @@ const Details = () => {
     fetchPosts();
   }, [posts]);
 
+  console.log(posts);
+
   return (
     <DetailsStyleContainer>
-      <p>new post</p>
       {posts.map((post) => (
         <div key={post.id}>
           <h2>{post.title}</h2>

@@ -1,11 +1,10 @@
 import { Hanko, register } from "@teamhanko/hanko-elements";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const hankoApi = import.meta.env.VITE_HANKO_API_URL;
 
 const LogOut = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [hanko, setHanko] = useState<Hanko>();
 
   useEffect(() => {
@@ -17,7 +16,7 @@ const LogOut = () => {
   const handleLogOut = async () => {
     try {
       await hanko?.user.logout();
-      navigate("/login");
+      // navigate("/login");
     } catch (error) {
       console.log("Error during logout", error);
     }

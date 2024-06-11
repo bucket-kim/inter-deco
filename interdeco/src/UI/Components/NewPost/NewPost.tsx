@@ -1,11 +1,19 @@
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
+import { shallow } from "zustand/shallow";
+import { useGlobalState } from "../../../state/useGlobalState";
 import { db } from "../../../utils/firebase";
 import NewPostStyleContainer from "./NewPostStyleContainer";
 
 const NewPost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+
+  const { setNewPostShow } = useGlobalState((state) => {
+    return {
+      setNewPostShow: state.setNewPostShow,
+    };
+  }, shallow);
 
   const saveContent = async (title: string, content: string) => {
     try {
@@ -25,6 +33,7 @@ const NewPost = () => {
     await saveContent(title, content);
     setTitle("");
     setContent("");
+    setNewPostShow(false);
   };
 
   return (

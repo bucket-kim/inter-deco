@@ -18,7 +18,6 @@ const Details = () => {
   };
 
   useEffect(() => {
-    getContent();
     const fetchPosts = async () => {
       const postsData = await getContent();
       setPosts(postsData);
@@ -27,19 +26,26 @@ const Details = () => {
     fetchPosts();
   }, [posts]);
 
-  console.log(posts);
-
   return (
     <DetailsStyleContainer>
-      {posts.map((post) => (
-        <div key={post.id}>
-          <h2>{post.title}</h2>
-          <p>{post.content}</p>
-          <small>
-            {new Date(post.createAt.seconds * 1000).toLocaleDateString()}
-          </small>
+      {/* {Array.from({ length: 5 }).map((post, idx) => (
+        <div key={idx} className="container">
+          <h2>hello</h2>
+          <p>content</p>
         </div>
-      ))}
+      ))} */}
+      {posts
+        .slice()
+        .reverse()
+        .map((post) => (
+          <div key={post.id} className="container">
+            <h2>{post.title}</h2>
+            <p>{post.content}</p>
+            <small>
+              {new Date(post.createAt.seconds * 1000).toLocaleDateString()}
+            </small>
+          </div>
+        ))}
     </DetailsStyleContainer>
   );
 };

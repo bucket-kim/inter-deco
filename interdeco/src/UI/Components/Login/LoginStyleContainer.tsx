@@ -4,9 +4,13 @@ const LoginStyleContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  height: 30rem;
-  width: 30rem;
-  z-index: 2;
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
 `;
 
 export default LoginStyleContainer;

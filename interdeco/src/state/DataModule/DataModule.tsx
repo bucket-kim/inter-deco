@@ -1,7 +1,7 @@
 import { globalStateApiType } from "../GlobalStateTypes";
 import { PostType } from "./DataModuleTypes";
 
-const DataModule = ({ set, get }: globalStateApiType) => {
+const DataModule = ({ set }: globalStateApiType) => {
   return {
     posts: [],
     setPosts: (posts: PostType[]) => {

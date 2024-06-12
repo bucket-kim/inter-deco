@@ -1,17 +1,9 @@
 import { Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import * as THREE from "three";
 import BlogModel from "./BlogModel/Blog";
 import R3FStyleContainer from "./R3FStyleContainer";
 
 const R3F = () => {
-  const bottleMaterial = new THREE.MeshPhysicalMaterial({
-    color: "#efefef",
-    transmission: 1,
-    roughness: 0.35,
-    thickness: 1,
-    envMapIntensity: 1,
-  });
   return (
     <R3FStyleContainer>
       <Canvas>

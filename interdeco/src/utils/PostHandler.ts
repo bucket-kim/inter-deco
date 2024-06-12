@@ -1,5 +1,5 @@
 const fetchAllPosts = (setLoading: any, setPosts: any) => {
-  fetch("http://localhost:4000/posts")
+  fetch("https://blog-backend-zh2z.onrender.com/api/posts")
     .then((res) => res.json())
     .then((data) => {
       setLoading(false);
@@ -9,7 +9,7 @@ const fetchAllPosts = (setLoading: any, setPosts: any) => {
 };
 
 const fetchPostContent = (slug: any, setLoading: any, setPost: any) => {
-  fetch("http://localhost:4000/post/details", {
+  fetch("https://blog-backend-zh2z.onrender.com/api/post/:id", {
     method: "POST",
     body: JSON.stringify({ slug: slug }),
     headers: {

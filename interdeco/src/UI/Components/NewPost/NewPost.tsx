@@ -30,7 +30,7 @@ const NewPost = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/post",
+        "https://blog-backend-zh2z.onrender.com/api/post",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

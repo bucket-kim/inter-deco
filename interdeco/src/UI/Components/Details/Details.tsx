@@ -8,9 +8,10 @@ const Details = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/posts");
+        const response = await axios.get(
+          "https://blog-backend-zh2z.onrender.com/api/posts",
+        );
         setPosts(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error("Error fetching posts:", error);
       }

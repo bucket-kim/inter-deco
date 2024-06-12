@@ -1,6 +1,7 @@
+import { DataModuleTypes } from "./DataModule/DataModuleTypes";
 import { UIModuleTypes } from "./UIModule/UIModuleTypes";
 
-export interface GlobalStateTypes extends UIModuleTypes {}
+export interface GlobalStateTypes extends UIModuleTypes, DataModuleTypes {}
 
 export type SetState<T extends object> = (
   partial: Partial<T> | ((state: T) => void),

@@ -21,8 +21,6 @@ type GLTFResult = GLTF & {
 const BlogModel = (props: JSX.IntrinsicElements["group"]) => {
   const { nodes } = useGLTF("/models/blog.glb") as GLTFResult;
 
-  console.log(nodes);
-
   return (
     <group {...props} dispose={null}>
       <Float speed={2} rotationIntensity={0.5} floatIntensity={0.25}>

@@ -1,51 +1,47 @@
-import { collection, getDocs } from "firebase/firestore";
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { db } from "../../../utils/firebase";
 import DetailsStyleContainer from "./DetailsStyleContainer";
 
 const Details = () => {
   const [posts, setPosts] = useState<any[]>([]);
 
-  const getContent = async () => {
-    const querySnapShot = await getDocs(collection(db, "posts"));
-
-    const posts: any[] = [];
-    querySnapShot.forEach((doc) => {
-      posts.push({ id: doc.id, ...doc.data() });
-    });
-
-    return posts;
-  };
-
   useEffect(() => {
     const fetchPosts = async () => {
-      const postsData = await getContent();
-      setPosts(postsData);
+      try {
+        const response = await axios.get("http://localhost:4000/api/posts");
+        setPosts(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
     };
 
     fetchPosts();
-  }, [posts]);
+  }, []);
 
   return (
     <DetailsStyleContainer>
-      {/* {Array.from({ length: 5 }).map((post, idx) => (
+      {posts.map((post, idx) => (
         <div key={idx} className="container">
-          <h2>hello</h2>
-          <p>content</p>
-        </div>
-      ))} */}
-      {posts
-        .slice()
-        .reverse()
-        .map((post) => (
-          <div key={post.id} className="container">
-            <h2>{post.title}</h2>
-            <p>{post.content}</p>
-            <small>
-              {new Date(post.createAt.seconds * 1000).toLocaleDateString()}
-            </small>
+          <h2>{post.title}</h2>
+          <p>{post.content}</p>
+          <div className="img-container">
+            <img
+              src={post.imageUrl}
+              alt={post.title}
+              width={100}
+              height={100}
+            />
           </div>
-        ))}
+          <small>
+            {new Date(post.createdAt).toLocaleDateString(undefined, {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </small>
+        </div>
+      ))}
     </DetailsStyleContainer>
   );
 };

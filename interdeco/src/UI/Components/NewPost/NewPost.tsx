@@ -1,13 +1,13 @@
-import { addDoc, collection } from "firebase/firestore";
+import axios from "axios";
 import { useState } from "react";
 import { shallow } from "zustand/shallow";
 import { useGlobalState } from "../../../state/useGlobalState";
-import { db } from "../../../utils/firebase";
 import NewPostStyleContainer from "./NewPostStyleContainer";
 
 const NewPost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [image, setImage] = useState<any>(null);
 
   const { setNewPostShow } = useGlobalState((state) => {
     return {
@@ -15,25 +15,37 @@ const NewPost = () => {
     };
   }, shallow);
 
-  const saveContent = async (title: string, content: string) => {
-    try {
-      const docRef = await addDoc(collection(db, "posts"), {
-        title,
-        content,
-        createAt: new Date(),
-      });
-      console.log(`Document written with ID: ${docRef.id}`);
-    } catch (e) {
-      console.log(e);
-    }
+  const ImageUpload = (e: any) => {
+    const file = e.target.files[0];
+    setImage(file);
   };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    await saveContent(title, content);
-    setTitle("");
-    setContent("");
-    setNewPostShow(false);
+    if (!image) return;
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("image", image);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/post",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        },
+      );
+      console.log(response.data);
+      if (response.status === 201) {
+        setTitle("");
+        setContent("");
+        setImage(null);
+        setNewPostShow(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -51,6 +63,12 @@ const NewPost = () => {
           onChange={(e: any) => setContent(e.target.value)}
           placeholder="Content"
           required
+        />
+        <input
+          type="file"
+          accept="image/*"
+          name="photo"
+          onChange={ImageUpload}
         />
         <button type="submit">Post</button>
       </form>

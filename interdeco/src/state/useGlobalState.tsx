@@ -1,12 +1,13 @@
 import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
+import { DataModule } from "./DataModule/DataModule";
 import { GetState, GlobalStateTypes, SetState } from "./GlobalStateTypes";
 import { UIModule } from "./UIModule/UIModule";
 
 const storeModules = (
   set: SetState<GlobalStateTypes>,
   get: GetState<GlobalStateTypes>,
-) => ({ ...UIModule({ set, get }) });
+) => ({ ...UIModule({ set, get }), ...DataModule({ set, get }) });
 
 const immerWrapper = immer<GlobalStateTypes>(
   (set: SetState<GlobalStateTypes>, get: GetState<GlobalStateTypes>) =>

@@ -32,7 +32,6 @@ const Home = () => {
         </div>
       </nav>
       <main>
-        <h1>Latest Posts</h1>
         <div className="post-container">
           {/* {posts.map((post: any) => (
             <Link to={`/post/${post.slug}`} key={post.post_id}>

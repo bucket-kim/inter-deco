@@ -20,6 +20,13 @@ const DetailsStyleContainer = styled.div`
     width: 40rem;
     padding: 1rem;
     margin: 1rem;
+    position: relative;
+
+    small {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
   }
 `;
 

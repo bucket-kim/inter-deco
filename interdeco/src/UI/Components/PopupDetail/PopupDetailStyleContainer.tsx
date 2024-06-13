@@ -7,8 +7,8 @@ const PopupDetailStyleContainer = styled.div`
   z-index: 3;
 
   .popup-container {
-    height: 30rem;
-    width: 30rem;
+    height: 36rem;
+    width: 36rem;
     position: absolute;
     top: 50%;
     left: 50%;

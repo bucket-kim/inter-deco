@@ -7,6 +7,11 @@ const DataModule = ({ set }: globalStateApiType) => {
     setPosts: (posts: PostType[]) => {
       set({ posts: posts });
     },
+
+    blogId: "",
+    setBlogId: (blogId: string) => {
+      set({ blogId: blogId });
+    },
   };
 };
 

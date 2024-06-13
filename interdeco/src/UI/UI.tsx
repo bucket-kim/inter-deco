@@ -6,6 +6,7 @@ import Details from "./Components/Details/Details";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login";
 import NewPost from "./Components/NewPost/NewPost";
+import PopupDetail from "./Components/PopupDetail/PopupDetail";
 
 const UI = () => {
   const { newPostShow } = useGlobalState((state) => {
@@ -24,6 +25,7 @@ const UI = () => {
         </Routes>
       </Router>
       <Details />
+      <PopupDetail />
     </Fragment>
   );
 };

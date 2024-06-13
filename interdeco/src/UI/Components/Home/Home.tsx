@@ -14,7 +14,7 @@ const Home = () => {
 
   return (
     <HomeStyleContainer>
-      <h2>BLOG</h2>
+      <h2 className="title">BLOG RECORDING</h2>
       <nav>
         <div className="nav-login">
           {loggedIn ? (

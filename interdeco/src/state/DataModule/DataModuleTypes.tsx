@@ -9,4 +9,7 @@ export interface PostType {
 export interface DataModuleTypes {
   posts: PostType[];
   setPosts: (posts: []) => void;
+
+  blogId: string;
+  setBlogId: (blogId: string) => void;
 }

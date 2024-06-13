@@ -11,6 +11,11 @@ const UIModule = ({ set }: globalStateApiType) => {
     setNewPostShow: (newPostShow: boolean) => {
       set({ newPostShow: newPostShow });
     },
+
+    episode: 1,
+    setEpisode: (episode: number) => {
+      set({ episode: episode });
+    },
   };
 };
 

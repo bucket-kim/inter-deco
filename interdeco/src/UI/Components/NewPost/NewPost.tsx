@@ -9,9 +9,11 @@ const NewPost = () => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState<any>(null);
 
-  const { setNewPostShow } = useGlobalState((state) => {
+  const { setNewPostShow, setEpisode, episode } = useGlobalState((state) => {
     return {
       setNewPostShow: state.setNewPostShow,
+      setEpisode: state.setEpisode,
+      episode: state.episode,
     };
   }, shallow);
 
@@ -30,7 +32,7 @@ const NewPost = () => {
 
     try {
       const response = await axios.post(
-        "https://blog-backend-zh2z.onrender.com/api/post",
+        `${import.meta.env.VITE_BAVITE_BACKEND_API_URL}/api/post`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -38,6 +40,7 @@ const NewPost = () => {
       );
       console.log(response.data);
       if (response.status === 201) {
+        setEpisode(episode + 1);
         setTitle("");
         setContent("");
         setImage(null);

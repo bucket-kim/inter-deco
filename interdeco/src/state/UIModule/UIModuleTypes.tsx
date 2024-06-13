@@ -4,4 +4,7 @@ export interface UIModuleTypes {
 
   newPostShow: boolean;
   setNewPostShow: (newPostShow: boolean) => void;
+
+  episode: number;
+  setEpisode: (episode: number) => void;
 }

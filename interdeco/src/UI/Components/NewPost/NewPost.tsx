@@ -32,7 +32,7 @@ const NewPost = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BAVITE_BACKEND_API_URL}/api/post`,
+        `${import.meta.env.VITE_BACKEND_API_URL}/api/post`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

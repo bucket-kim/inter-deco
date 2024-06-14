@@ -57,7 +57,7 @@ const Details: FC<DetailsProps> = ({ datas }: any) => {
               read s'more
             </p>
 
-            <p>EP {episode}</p>
+            <p>ID: {post._id.substring(19, 24)}</p>
 
             <small>
               {new Date(post.createdAt).toLocaleDateString(undefined, {

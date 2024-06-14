@@ -26,8 +26,6 @@ const UI = () => {
           `${import.meta.env.VITE_BACKEND_API_URL}/api/posts`,
         );
         setPosts(response.data);
-
-        console.log(response.data);
       } catch (error) {
         console.error("Error fetching posts:", error);
       }

@@ -40,7 +40,6 @@ const NewPost = () => {
       );
       console.log(response.data);
       if (response.status === 201) {
-        setEpisode(episode + 1);
         setTitle("");
         setContent("");
         setImage(null);
@@ -59,6 +58,13 @@ const NewPost = () => {
           value={title}
           onChange={(e: any) => setTitle(e.target.value)}
           placeholder="title"
+          required
+        />
+        <input
+          type="text"
+          value={episode}
+          onChange={(e: any) => setEpisode(e.target.value)}
+          placeholder="episode"
           required
         />
         <textarea

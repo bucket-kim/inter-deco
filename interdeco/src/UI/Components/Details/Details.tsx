@@ -17,8 +17,8 @@ interface DetailsProps {
 const Details: FC<DetailsProps> = ({ datas }: any) => {
   const [hovered, setHovered] = useState<number | null>(null);
   const readRef = useRef<(HTMLParagraphElement | null)[]>([]);
-  const [activeSlide, setActiveSlide] = useState<number>(0);
-  const [isAnimating, setIsAnimating] = useState<boolean>(false);
+  // const [activeSlide, setActiveSlide] = useState<number>(0);
+  // const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
   const { setBlogId } = useGlobalState((state) => {
     return {
@@ -46,15 +46,15 @@ const Details: FC<DetailsProps> = ({ datas }: any) => {
         spaceBetween={10}
         navigation={true}
         // loop={true}
-        onSlideChange={(swiper) => {
-          setIsAnimating(true);
-          const timeout = setTimeout(() => {
-            setIsAnimating(false);
-            setActiveSlide(swiper.activeIndex);
-          }, 300);
+        // onSlideChange={(swiper) => {
+        //   setIsAnimating(true);
+        //   const timeout = setTimeout(() => {
+        //     setIsAnimating(false);
+        //     setActiveSlide(swiper.activeIndex);
+        //   }, 300);
 
-          return () => clearTimeout(timeout);
-        }}
+        //   return () => clearTimeout(timeout);
+        // }}
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >

@@ -1,5 +1,6 @@
 import { Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import BlogModel from "./BlogModel/Blog";
 import R3FStyleContainer from "./R3FStyleContainer";
 
 const R3F = () => {
@@ -10,7 +11,7 @@ const R3F = () => {
         <pointLight position={[10, 10, 5]} />
         <pointLight position={[-10, -10, -5]} />
         <ambientLight intensity={0.4} />
-        {/* <BlogModel /> */}
+        <BlogModel />
         <Environment preset="warehouse" />
 
         {/* <RoundedBox

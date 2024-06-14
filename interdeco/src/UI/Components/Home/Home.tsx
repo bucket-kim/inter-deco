@@ -26,7 +26,7 @@ const Home = () => {
             </>
           ) : (
             <Link to={"/login"}>
-              <h2>Login</h2>
+              <h2 className="login-button">Login</h2>
             </Link>
           )}
         </div>

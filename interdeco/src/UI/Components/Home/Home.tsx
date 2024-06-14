@@ -14,7 +14,7 @@ const Home = () => {
 
   return (
     <HomeStyleContainer>
-      <h2 className="title">BLOG RECORDING</h2>
+      <h2 className="title">GOL-B RECORDs</h2>
       <nav>
         <div className="nav-login">
           {loggedIn ? (
@@ -32,13 +32,7 @@ const Home = () => {
         </div>
       </nav>
       <main>
-        <div className="post-container">
-          {/* {posts.map((post: any) => (
-            <Link to={`/post/${post.slug}`} key={post.post_id}>
-              <h1>{post.title}</h1>
-            </Link>
-          ))} */}
-        </div>
+        <div className="post-container"></div>
       </main>
     </HomeStyleContainer>
   );

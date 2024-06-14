@@ -1,11 +1,16 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import gsap from "gsap";
+import { FC, useEffect, useMemo, useRef, useState } from "react";
 import { shallow } from "zustand/shallow";
 import { useGlobalState } from "../../../state/useGlobalState";
 import DetailsStyleContainer from "./DetailsStyleContainer";
 
-const Details = () => {
-  const [posts, setPosts] = useState<any[]>([]);
+interface DetailsProps {
+  datas: any;
+}
+
+const Details: FC<DetailsProps> = ({ datas }: any) => {
+  const [hovered, setHovered] = useState<number | null>(null);
+  const readRef = useRef<(HTMLParagraphElement | null)[]>([]);
 
   const { episode, setBlogId } = useGlobalState((state) => {
     return {
@@ -14,64 +19,60 @@ const Details = () => {
     };
   }, shallow);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_API_URL}/api/posts`,
-        );
-        setPosts(response.data);
-
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      }
-    };
-
-    fetchPosts();
-  }, []);
-
   const handleClick = (post: any) => {
     setBlogId(post._id);
   };
 
-  return (
-    <DetailsStyleContainer>
-      {posts.map((post, idx) => (
-        <div key={idx} className="container">
-          <div className="content-container">
-            <h2>{post.title}</h2>
-            <div className="img-container">
-              <img src={post.imageUrl} alt={post.title} />
-            </div>
-            {/* <p>
-              {post.content.length > 30
-                ? post.content.substring(0, 76) + "..."
-                : post.content}
-            </p> */}
-            <div className="footer-container">
-              <p
-                style={{ cursor: "pointer" }}
-                onClick={() => handleClick(post)}
-              >
-                read s'more
-              </p>
+  useEffect(() => {
+    readRef.current.forEach((ref, idx: number) => {
+      if (!ref) return;
+      gsap.to(ref, {
+        scale: hovered === idx ? 1.125 : 1,
+        duration: 0.4,
+      });
+    });
+  }, [hovered]);
 
-              <p>EP {episode}</p>
+  const memoizeData = useMemo(() => {
+    return datas.map((post: any, idx: number) => (
+      <div key={idx} className="container">
+        <div className="content-container">
+          <h2>{post.title}</h2>
+          <div className="img-container">
+            <img src={post.imageUrl} alt={post.title} />
+          </div>
+          {/* <p>
+            {post.content.length > 30
+              ? post.content.substring(0, 76) + "..."
+              : post.content}
+          </p> */}
+          <div className="footer-container">
+            <p
+              ref={(el) => (readRef.current[idx] = el)}
+              style={{ cursor: "pointer" }}
+              onClick={() => handleClick(post)}
+              onPointerEnter={() => setHovered(idx)}
+              onPointerOut={() => setHovered(null)}
+            >
+              read s'more
+            </p>
 
-              <small>
-                {new Date(post.createdAt).toLocaleDateString(undefined, {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </small>
-            </div>
+            <p>EP {episode}</p>
+
+            <small>
+              {new Date(post.createdAt).toLocaleDateString(undefined, {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </small>
           </div>
         </div>
-      ))}
-    </DetailsStyleContainer>
-  );
+      </div>
+    ));
+  }, [datas]);
+
+  return <DetailsStyleContainer>{memoizeData}</DetailsStyleContainer>;
 };
 
 export default Details;

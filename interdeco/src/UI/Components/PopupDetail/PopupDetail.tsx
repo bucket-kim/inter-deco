@@ -1,18 +1,22 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import gsap from "gsap";
+import { FC, useCallback, useEffect, useMemo, useRef } from "react";
 import { shallow } from "zustand/shallow";
 import { useGlobalState } from "../../../state/useGlobalState";
 import PopupDetailStyleContainer from "./PopupDetailStyleContainer";
 
 interface Post {
-  id: number;
+  _id: string;
   title: string;
   content: string;
   imageUrl: string;
   createdAt: string;
 }
 
-const PopupDetail = () => {
+interface PopupDetailProps {
+  datas: Post[];
+}
+
+const PopupDetail: FC<PopupDetailProps> = ({ datas }) => {
   const { blogId, setBlogId } = useGlobalState((state) => {
     return {
       blogId: state.blogId,
@@ -20,42 +24,53 @@ const PopupDetail = () => {
     };
   }, shallow);
 
-  const [details, setDetails] = useState<Post | null>(null);
+  const popupRef = useRef<HTMLDivElement>(null);
+
+  const details = useMemo(() => {
+    return datas.find((post) => post._id.toString() === blogId || null);
+  }, [blogId, datas]);
 
   useEffect(() => {
-    const fetchPostId = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_API_URL}/api/posts/${blogId}`,
-        );
-        setDetails(response.data);
-      } catch (error) {
-        console.log("Error fetching Id ", error);
-      }
-    };
-    fetchPostId();
-  }, [blogId]);
+    if (!popupRef.current) return;
 
-  const handleCloseClick = () => {
-    setBlogId("");
-    setDetails(null);
-  };
+    if (blogId !== "" && details !== null) {
+      gsap.to(popupRef.current, {
+        opacity: 1,
+        visibility: "visible",
+      });
+    }
+  }, [blogId, details]);
+
+  const handleCloseClick = useCallback(() => {
+    if (!popupRef.current) return;
+    gsap.to(popupRef.current, {
+      opacity: 0,
+      onComplete: () => {
+        if (!popupRef.current) return;
+        popupRef.current.style.visibility = "hidden";
+        setBlogId("");
+      },
+    });
+  }, []);
 
   if (!details) return <div>Loading...</div>;
 
   return (
-    <PopupDetailStyleContainer>
+    <PopupDetailStyleContainer ref={popupRef}>
       <div className="popup-container">
-        <button onClick={handleCloseClick}>X</button>
+        <div className="header">
+          <button onClick={handleCloseClick}>X</button>
+        </div>
+        <div className="contents">
+          <div className="img-container">
+            <img src={details.imageUrl} alt={details.title} />
+          </div>
+          <h1>{details.title}</h1>
+        </div>
 
-        <h1>{details.title}</h1>
-        <img
-          src={details.imageUrl}
-          alt={details.title}
-          width={100}
-          height={100}
-        />
-        <p>{details.content}</p>
+        <div className="content-paragraph">
+          <p>{details.content}</p>
+        </div>
       </div>
     </PopupDetailStyleContainer>
   );

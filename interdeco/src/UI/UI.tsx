@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 import { shallow } from "zustand/shallow";
@@ -14,6 +16,26 @@ const UI = () => {
       newPostShow: state.newPostShow,
     };
   }, shallow);
+
+  const [posts, setPosts] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_API_URL}/api/posts`,
+        );
+        setPosts(response.data);
+
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
   return (
     <Fragment>
       {newPostShow && <NewPost />}
@@ -24,8 +46,8 @@ const UI = () => {
           <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
-      <Details />
-      <PopupDetail />
+      <Details datas={posts} />
+      <PopupDetail datas={posts} />
     </Fragment>
   );
 };

@@ -13,7 +13,20 @@ const HomeStyleContainer = styled.div`
     top: 2rem;
     left: 50%;
     transform: translate(-50%, 0%);
-    font-size: 4rem;
+    font-size: 5rem;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      "Open Sans",
+      "Helvetica Neue",
+      sans-serif;
+    color: white;
   }
 
   .nav-login {

@@ -9,6 +9,18 @@ const DetailsStyleContainer = styled.div`
   transform: translateY(-50%);
   overflow-x: scroll;
   white-space: nowrap;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
 
   .container {
     display: inline-block;
@@ -16,7 +28,7 @@ const DetailsStyleContainer = styled.div`
     border: 0.2rem white solid;
     border-radius: 1rem;
     backdrop-filter: blur(1rem);
-    height: 30rem;
+    height: 32rem;
     width: 40rem;
     padding: 1rem;
     margin: 1rem;
@@ -33,13 +45,24 @@ const DetailsStyleContainer = styled.div`
 
       h2 {
         margin: 0;
+        padding: 0.5rem 3rem;
+        border-radius: 24rem;
         font-size: 2.5rem;
+        /* color: #7b84df; */
         color: white;
+        font-weight: 500;
+        background: rgba(255, 255, 255, 0.4);
       }
 
       .img-container {
         height: 20rem;
         width: 100%;
+        border-radius: 1rem;
+        overflow: hidden;
+
+        -webkit-box-shadow: 2px 2px 16px -10px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 2px 2px 16px -10px rgba(0, 0, 0, 0.75);
+        box-shadow: 2px 2px 16px -10px rgba(0, 0, 0, 0.75);
 
         img {
           object-fit: cover;
@@ -51,24 +74,16 @@ const DetailsStyleContainer = styled.div`
       .footer-container {
         width: 100%;
         padding: 1rem 2rem;
+        border-radius: 24rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
         background: rgba(255, 255, 255, 0.4);
-        border-radius: 24rem;
         color: #7b84df;
-        font-family:
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          "Segoe UI",
-          Roboto,
-          Oxygen,
-          Ubuntu,
-          Cantarell,
-          "Open Sans",
-          "Helvetica Neue",
-          sans-serif;
+
+        -webkit-box-shadow: 2px 2px 16px -10px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 2px 2px 16px -10px rgba(0, 0, 0, 0.75);
+        box-shadow: 2px 2px 16px -10px rgba(0, 0, 0, 0.75);
 
         p,
         small {

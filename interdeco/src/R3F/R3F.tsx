@@ -1,40 +1,28 @@
-import { RoundedBox } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import * as THREE from "three";
+import Blog from "./BlogModel/Blog";
 import Light from "./Light/Light";
+import Mesh from "./Mesh/Mesh";
 import R3FStyleContainer from "./R3FStyleContainer";
 
 const R3F = () => {
   return (
     <R3FStyleContainer>
-      <Canvas shadows>
+      <Canvas shadows camera={{ fov: 35, position: [0, 0, 11.5] }}>
+        <OrbitControls />
         <Light />
-        <group position={[0, -2.55, 0]}>
+        <group position={[0, -2.55, 0]} name="shadow plane">
           <mesh
             rotation={[-Math.PI / 2, 0, 0]}
             position={[0, 0, 0]}
             receiveShadow
           >
             <planeGeometry args={[100, 100]} />
-            <shadowMaterial transparent opacity={0.4} />
+            <shadowMaterial transparent opacity={0.4} color={"#a72700"} />
           </mesh>
         </group>
-        <RoundedBox
-          receiveShadow
-          castShadow
-          args={[1.4, 1, 0.2]} // Width, height, depth. Default is [1, 1, 1]
-          radius={0.05} // Radius of the rounded corners. Default is 0.05
-          smoothness={4} // The number of curve segments. Default is 4
-          bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
-          creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
-          position={[0, 0, 0]}
-          material={
-            new THREE.MeshStandardMaterial({
-              color: "#dcdcdc",
-            })
-          }
-          scale={[5, 5, 2]}
-        />
+        <Blog />
+        <Mesh />
       </Canvas>
     </R3FStyleContainer>
   );

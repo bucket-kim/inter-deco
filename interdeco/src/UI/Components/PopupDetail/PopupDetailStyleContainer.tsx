@@ -29,12 +29,12 @@ const PopupDetailStyleContainer = styled.div`
     width: 60rem;
     /* padding: 4rem; */
     position: absolute;
-    border-radius: 1.5rem;
+    border-radius: 2.4rem;
     overflow: hidden;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: white;
+    background: #f5f5f5;
     border: white 0.4rem solid;
     -webkit-box-shadow: 6px 6px 36px -20px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 6px 6px 36px -20px rgba(0, 0, 0, 0.75);
@@ -47,15 +47,19 @@ const PopupDetailStyleContainer = styled.div`
       align-items: center;
       justify-content: flex-start;
       padding: 0rem 1rem;
-      background: #cdd7f7;
+      background: #392a5b;
 
       button {
         border: none;
         background: #f96359;
         border-radius: 50%;
+        transform: translateX(1rem);
         width: 1.4rem;
         height: 1.4rem;
         cursor: pointer;
+        -webkit-box-shadow: 1px 1px 10px -2px rgba(255, 255, 255, 1);
+        -moz-box-shadow: 1px 1px 10px -2px rgba(255, 255, 255, 1);
+        box-shadow: 1px 1px 10px -2px rgba(255, 255, 255, 1);
       }
     }
 
@@ -74,7 +78,7 @@ const PopupDetailStyleContainer = styled.div`
         }
       }
       h1 {
-        color: #7b84df;
+        color: #4c62dc;
         height: 4rem;
         line-height: 4rem;
       }

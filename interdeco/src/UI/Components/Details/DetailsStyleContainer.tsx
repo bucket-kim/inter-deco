@@ -5,7 +5,7 @@ const DetailsStyleContainer = styled.div`
   top: 50%;
   left: 50%;
   z-index: 2;
-  width: 40rem;
+  width: 45rem;
   transform: translate(-50%, -50%);
   /* display: flex;
   align-items: center;
@@ -25,7 +25,7 @@ const DetailsStyleContainer = styled.div`
 
   .swiper {
     height: 32rem;
-    width: 40rem;
+    width: 45rem;
     .container {
       display: inline-block;
       background: rgba(255, 255, 255, 0.1);
@@ -33,7 +33,7 @@ const DetailsStyleContainer = styled.div`
       border-radius: 1rem;
       backdrop-filter: blur(1rem);
       height: 32rem;
-      width: 40rem;
+      width: 45rem;
       padding: 1rem;
       /* margin: 1rem; */
       position: relative;
@@ -52,10 +52,13 @@ const DetailsStyleContainer = styled.div`
           padding: 0.5rem 3rem;
           border-radius: 24rem;
           font-size: 2.5rem;
-          /* color: #7b84df; */
-          color: white;
+          color: #4c62dc;
+          /* color: white; */
           font-weight: 500;
           background: rgba(255, 255, 255, 0.4);
+          -webkit-box-shadow: 2px 2px 16px -10px rgba(0, 0, 0, 0.75);
+          -moz-box-shadow: 2px 2px 16px -10px rgba(0, 0, 0, 0.75);
+          box-shadow: 2px 2px 16px -10px rgba(0, 0, 0, 0.75);
         }
 
         .img-container {
@@ -83,7 +86,7 @@ const DetailsStyleContainer = styled.div`
           align-items: center;
           justify-content: space-between;
           background: rgba(255, 255, 255, 0.4);
-          color: #7b84df;
+          color: #4c62dc;
 
           -webkit-box-shadow: 2px 2px 16px -10px rgba(0, 0, 0, 0.75);
           -moz-box-shadow: 2px 2px 16px -10px rgba(0, 0, 0, 0.75);

@@ -12,9 +12,8 @@ const Details: FC<DetailsProps> = ({ datas }: any) => {
   const [hovered, setHovered] = useState<number | null>(null);
   const readRef = useRef<(HTMLParagraphElement | null)[]>([]);
 
-  const { episode, setBlogId } = useGlobalState((state) => {
+  const { setBlogId } = useGlobalState((state) => {
     return {
-      episode: state.episode,
       setBlogId: state.setBlogId,
     };
   }, shallow);

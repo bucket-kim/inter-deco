@@ -1,4 +1,4 @@
-import { Sphere } from "@react-three/drei";
+import { Float, Sphere } from "@react-three/drei";
 import * as THREE from "three";
 
 const Mesh = ({ ...props }: any) => {
@@ -8,36 +8,36 @@ const Mesh = ({ ...props }: any) => {
     roughness: 0.2,
   });
 
+  type SphereObjectType = {
+    position: [number, number, number];
+    scale: number;
+  };
+
+  const sphereObject: SphereObjectType[] = [
+    { position: [-3.75, 0, 0.8], scale: 0.5 },
+    { position: [-4, -0.5, 1.8], scale: 0.25 },
+    { position: [-4.2, 2.1, -0.25], scale: 0.3 },
+    { position: [4, 2.8, -1.5], scale: 0.8 },
+  ];
+
   return (
     <group {...props}>
-      <Sphere
-        position={[-3.75, 0, 0.8]}
-        castShadow
-        receiveShadow
-        scale={0.5}
-        material={material}
-      />
-      <Sphere
-        position={[-4, -0.5, 1.5]}
-        castShadow
-        receiveShadow
-        scale={0.25}
-        material={material}
-      />
-      <Sphere
-        position={[-4.2, 2.5, -0.25]}
-        castShadow
-        receiveShadow
-        scale={0.3}
-        material={material}
-      />
-      <Sphere
-        position={[4, 3, -1.5]}
-        castShadow
-        receiveShadow
-        scale={0.8}
-        material={material}
-      />
+      {sphereObject.map((obj, idx) => (
+        <Float
+          key={idx}
+          floatIntensity={1}
+          rotationIntensity={0.75}
+          // floatingRange={[1, 0.5]}
+        >
+          <Sphere
+            position={obj.position}
+            castShadow
+            receiveShadow
+            scale={obj.scale}
+            material={material}
+          />
+        </Float>
+      ))}
     </group>
   );
 };

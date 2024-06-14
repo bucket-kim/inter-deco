@@ -1,4 +1,3 @@
-import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import Blog from "./BlogModel/Blog";
 import Light from "./Light/Light";
@@ -9,7 +8,7 @@ const R3F = () => {
   return (
     <R3FStyleContainer>
       <Canvas shadows camera={{ fov: 35, position: [0, 0, 11.5] }}>
-        <OrbitControls />
+        {/* <OrbitControls /> */}
         <Light />
         <group position={[0, -2.55, 0]} name="shadow plane">
           <mesh

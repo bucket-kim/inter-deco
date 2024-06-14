@@ -6,14 +6,13 @@ import NewPostStyleContainer from "./NewPostStyleContainer";
 
 const NewPost = () => {
   const [title, setTitle] = useState("");
+  const [episode, setEpisode] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState<any>(null);
 
-  const { setNewPostShow, setEpisode, episode } = useGlobalState((state) => {
+  const { setNewPostShow } = useGlobalState((state) => {
     return {
       setNewPostShow: state.setNewPostShow,
-      setEpisode: state.setEpisode,
-      episode: state.episode,
     };
   }, shallow);
 
@@ -27,6 +26,7 @@ const NewPost = () => {
     if (!image) return;
     const formData = new FormData();
     formData.append("title", title);
+    formData.append("episode", episode);
     formData.append("content", content);
     formData.append("image", image);
 
@@ -41,6 +41,7 @@ const NewPost = () => {
       console.log(response.data);
       if (response.status === 201) {
         setTitle("");
+        setEpisode("");
         setContent("");
         setImage(null);
         setNewPostShow(false);
@@ -58,6 +59,13 @@ const NewPost = () => {
           value={title}
           onChange={(e: any) => setTitle(e.target.value)}
           placeholder="title"
+          required
+        />
+        <input
+          type="text"
+          value={episode}
+          onChange={(e: any) => setEpisode(e.target.value)}
+          placeholder="episode"
           required
         />
         <input

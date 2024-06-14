@@ -34,6 +34,8 @@ const UI = () => {
     fetchPosts();
   }, []);
 
+  console.log(posts);
+
   return (
     <Fragment>
       {newPostShow && <NewPost />}

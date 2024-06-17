@@ -34,7 +34,9 @@ const UI = () => {
     fetchPosts();
   }, []);
 
-  console.log(posts);
+  useEffect(() => {
+    console.log(posts);
+  }, [posts]);
 
   return (
     <Fragment>

@@ -68,13 +68,7 @@ const NewPost = () => {
           placeholder="episode"
           required
         />
-        <input
-          type="text"
-          value={episode}
-          onChange={(e: any) => setEpisode(e.target.value)}
-          placeholder="episode"
-          required
-        />
+
         <textarea
           value={content}
           onChange={(e: any) => setContent(e.target.value)}

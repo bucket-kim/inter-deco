@@ -6,6 +6,7 @@ import { shallow } from "zustand/shallow";
 import { useGlobalState } from "../state/useGlobalState";
 import Details from "./Components/Details/Details";
 import Home from "./Components/Home/Home";
+import Loading from "./Components/Loading/Loading";
 import Login from "./Components/Login/Login";
 import NewPost from "./Components/NewPost/NewPost";
 import PopupDetail from "./Components/PopupDetail/PopupDetail";
@@ -25,6 +26,7 @@ const UI = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_API_URL}/api/posts`,
         );
+        console.log(response);
         setPosts(response.data);
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -48,8 +50,14 @@ const UI = () => {
           <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
-      <Details datas={posts} />
-      <PopupDetail datas={posts} />
+      {posts ? (
+        <Loading />
+      ) : (
+        <>
+          <Details datas={posts} />
+          <PopupDetail datas={posts} />
+        </>
+      )}
     </Fragment>
   );
 };

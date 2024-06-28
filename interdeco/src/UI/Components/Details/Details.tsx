@@ -17,8 +17,6 @@ interface DetailsProps {
 const Details: FC<DetailsProps> = ({ datas }: any) => {
   const [hovered, setHovered] = useState<number | null>(null);
   const readRef = useRef<(HTMLParagraphElement | null)[]>([]);
-  // const [activeSlide, setActiveSlide] = useState<number>(0);
-  // const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
   const { setBlogId } = useGlobalState((state) => {
     return {

@@ -48,6 +48,8 @@ const DetailsStyleContainer = styled.div`
         width: 100%;
 
         h2 {
+          width: 100%;
+          text-align: center;
           margin: 0;
           padding: 0.5rem 3rem;
           border-radius: 24rem;
@@ -100,6 +102,12 @@ const DetailsStyleContainer = styled.div`
           }
         }
       }
+    }
+  }
+
+  @media only screen and (max-width: 440px) {
+    .swiper {
+      width: 23rem;
     }
   }
 `;

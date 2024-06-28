@@ -26,7 +26,6 @@ const UI = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_API_URL}/api/posts`,
         );
-        console.log(response);
         setPosts(response.data);
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -35,10 +34,6 @@ const UI = () => {
 
     fetchPosts();
   }, []);
-
-  useEffect(() => {
-    console.log(posts);
-  }, [posts]);
 
   return (
     <Fragment>
@@ -50,7 +45,7 @@ const UI = () => {
           <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
-      {posts ? (
+      {!posts ? (
         <Loading />
       ) : (
         <>

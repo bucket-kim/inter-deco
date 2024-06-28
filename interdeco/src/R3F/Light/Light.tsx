@@ -5,7 +5,7 @@ const Light = () => {
   return (
     <Fragment>
       {/* <pointLight position={[-3, 2, 5]} color="white" intensity={10} /> */}
-      <pointLight position={[3.5, 1.5, 3]} intensity={20} color={"#fed0be"} />
+      <pointLight position={[3.5, 3, 3]} intensity={20} color={"#fed0be"} />
       <pointLight position={[-5, -1, 3]} intensity={50} color={"#f8054e"} />
       <directionalLight
         castShadow

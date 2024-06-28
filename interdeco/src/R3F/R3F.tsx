@@ -1,6 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import Blog from "./BlogModel/Blog";
 import Light from "./Light/Light";
+import Decoration from "./Mesh/Decoration/Decoration";
 import Mesh from "./Mesh/Mesh";
 import R3FStyleContainer from "./R3FStyleContainer";
 
@@ -22,6 +23,7 @@ const R3F = () => {
         </group>
         <Blog />
         <Mesh />
+        <Decoration />
       </Canvas>
     </R3FStyleContainer>
   );

@@ -103,9 +103,54 @@ const DetailsStyleContainer = styled.div`
     }
   }
 
-  @media only screen and (max-width: 440px) {
+  @media only screen and (max-width: 844px) {
+    width: 21rem;
     .swiper {
-      width: 23rem;
+      height: 14.5rem;
+
+      .container {
+        height: 14.5rem;
+
+        .content-container {
+          h2 {
+            font-size: 1.25rem;
+          }
+          .img-container {
+            height: 22rem;
+          }
+          .footer-container {
+            p,
+            small {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 440px) {
+    width: 23rem;
+    .swiper {
+      height: 32rem;
+
+      .container {
+        height: 32rem;
+
+        .content-container {
+          h2 {
+            font-size: 1.25rem;
+          }
+          .img-container {
+            height: 22rem;
+          }
+          .footer-container {
+            p,
+            small {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
     }
   }
 `;

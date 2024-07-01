@@ -57,7 +57,7 @@ const Decoration = (props: JSX.IntrinsicElements["group"]) => {
 
     groupRef.current.children.map((child: any, key: number) => {
       child.rotation.z =
-        child.rotation.z + Math.sin(time - (key / 10 + 1)) * 0.0075;
+        child.rotation.z + Math.sin(time - (key / 10 + 1)) * 0.005;
     });
   });
 

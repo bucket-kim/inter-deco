@@ -65,11 +65,10 @@ const PopupDetail: FC<PopupDetailProps> = ({ datas }) => {
           <div className="img-container">
             <img src={details.imageUrl} alt={details.title} />
           </div>
-          <h1>{details.title}</h1>
-        </div>
-
-        <div className="content-paragraph">
-          <p>{details.content}</p>
+          <div className="content-paragraph">
+            <h1>{details.title}</h1>
+            <p>{details.content}</p>
+          </div>
         </div>
       </div>
     </PopupDetailStyleContainer>

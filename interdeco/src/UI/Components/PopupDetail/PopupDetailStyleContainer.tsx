@@ -100,6 +100,42 @@ const PopupDetailStyleContainer = styled.div`
     }
     /* transform: translate(-50%, -50%); */
   }
+
+  @media only screen and (max-width: 844px) {
+    .popup-container {
+      width: 100%;
+      height: 100%;
+      .contents {
+        flex-direction: row;
+        .img-container {
+          width: 50%;
+        }
+
+        .content-paragraph {
+          margin: 0;
+          width: 50%;
+          height: 20rem;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 440px) {
+    .popup-container {
+      width: 100%;
+      height: 100%;
+      .contents {
+        flex-direction: column;
+        .img-container {
+          width: 100%;
+        }
+        .content-paragraph {
+          width: 100%;
+          margin: 0;
+          height: 27rem;
+        }
+      }
+    }
+  }
 `;
 
 export default PopupDetailStyleContainer;

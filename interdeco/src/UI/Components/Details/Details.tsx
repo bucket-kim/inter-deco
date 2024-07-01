@@ -62,7 +62,11 @@ const Details: FC<DetailsProps> = ({ datas }: any) => {
           </SwiperSlide>
         ))} */}
         {datas.map((post: any, idx: number) => (
-          <SwiperSlide key={idx} className="container">
+          <SwiperSlide
+            key={idx}
+            className="container"
+            onClick={() => handleClick(post)}
+          >
             <div className="content-container">
               <h2>{post.title}</h2>
               <div className="img-container">

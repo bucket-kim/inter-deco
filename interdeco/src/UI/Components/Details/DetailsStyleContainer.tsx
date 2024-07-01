@@ -33,6 +33,7 @@ const DetailsStyleContainer = styled.div`
       border-radius: 1rem;
       backdrop-filter: blur(1rem);
       height: 36rem;
+      cursor: pointer;
 
       padding: 1rem;
 

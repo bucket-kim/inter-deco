@@ -1,4 +1,6 @@
 import { useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { useRef } from "react";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
 import { decorationData } from "./config";
@@ -21,6 +23,12 @@ type GLTFResult = GLTF & {
 const Decoration = (props: JSX.IntrinsicElements["group"]) => {
   const { nodes } = useGLTF("/models/decoration.glb") as unknown as GLTFResult;
 
+  const groupRef = useRef<THREE.Group>(null);
+  const bowlRef = useRef<THREE.Group>(null);
+  const flower001 = useRef<THREE.Group>(null);
+  const flower002 = useRef<THREE.Group>(null);
+  const flower003 = useRef<THREE.Group>(null);
+
   const material = new THREE.MeshStandardMaterial({
     color: "#ffffff",
   });
@@ -31,10 +39,32 @@ const Decoration = (props: JSX.IntrinsicElements["group"]) => {
     color: "#eb4123",
   });
 
+  useFrame((state) => {
+    if (
+      !groupRef.current ||
+      !bowlRef.current ||
+      !flower001.current ||
+      !flower002.current ||
+      !flower003.current
+    )
+      return;
+    const time = state.clock.getElapsedTime();
+
+    bowlRef.current.rotation.z = Math.sin(time) * 0.15 + 0.2;
+    flower001.current.rotation.z = Math.sin(time - 1) * 0.05 + 0.2;
+    flower002.current.rotation.z = Math.sin(time - 1.2) * 0.05 + 0.2;
+    flower003.current.rotation.z = Math.sin(time - 1.4) * 0.05 + 0.2;
+
+    groupRef.current.children.map((child: any, key: number) => {
+      child.rotation.z =
+        child.rotation.z + Math.sin(time - (key / 10 + 1)) * 0.0075;
+    });
+  });
+
   return (
     <group {...props} dispose={null}>
-      <group position={[3.5, -2.5, 2]} scale={0.4}>
-        <group>
+      <group position={[3.5, -2.5, 2]} scale={0.4} ref={groupRef}>
+        <group ref={flower001}>
           <mesh
             name="stem001"
             castShadow
@@ -52,7 +82,7 @@ const Decoration = (props: JSX.IntrinsicElements["group"]) => {
             userData={{ name: "grass001" }}
           />
         </group>
-        <group>
+        <group ref={flower002}>
           <mesh
             name="stem002"
             castShadow
@@ -70,7 +100,7 @@ const Decoration = (props: JSX.IntrinsicElements["group"]) => {
             userData={{ name: "grass002" }}
           />
         </group>
-        <group>
+        <group ref={flower003}>
           <mesh
             name="stem003"
             castShadow
@@ -88,24 +118,26 @@ const Decoration = (props: JSX.IntrinsicElements["group"]) => {
             userData={{ name: "grass003" }}
           />
         </group>
-        <mesh
-          name="bowl_orange_geo"
-          castShadow
-          receiveShadow
-          material={orangeMaterial}
-          geometry={nodes.bowl_orange_geo.geometry}
-          userData={{ name: "bowl_orange_geo" }}
-        />
-        <mesh
-          name="bowl_white_geo"
-          castShadow
-          receiveShadow
-          material={material}
-          geometry={nodes.bowl_white_geo.geometry}
-          userData={{ name: "bowl_white_geo" }}
-        />
+        <group rotation={[0, 0, 0.2]} ref={bowlRef}>
+          <mesh
+            name="bowl_orange_geo"
+            castShadow
+            receiveShadow
+            material={orangeMaterial}
+            geometry={nodes.bowl_orange_geo.geometry}
+            userData={{ name: "bowl_orange_geo" }}
+          />
+          <mesh
+            name="bowl_white_geo"
+            castShadow
+            receiveShadow
+            material={material}
+            geometry={nodes.bowl_white_geo.geometry}
+            userData={{ name: "bowl_white_geo" }}
+          />
+        </group>
       </group>
-      <group position={[-1.3, -2.55, 2]} scale={0.25}>
+      <group position={[-1.3, -2.55, 2]} scale={0.25} ref={groupRef}>
         {decorationData.map((data: any, key: number) => (
           <group
             key={key}

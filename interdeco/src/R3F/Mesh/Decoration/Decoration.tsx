@@ -1,5 +1,4 @@
 import { useGLTF } from "@react-three/drei";
-import React from "react";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
 import { decorationData } from "./config";
@@ -18,11 +17,6 @@ type GLTFResult = GLTF & {
     grass003: THREE.Mesh;
   };
 };
-
-type ContextType = Record<
-  string,
-  React.ForwardRefExoticComponent<JSX.IntrinsicElements["mesh"]>
->;
 
 const Decoration = (props: JSX.IntrinsicElements["group"]) => {
   const { nodes } = useGLTF("/models/decoration.glb") as unknown as GLTFResult;
@@ -144,4 +138,4 @@ const Decoration = (props: JSX.IntrinsicElements["group"]) => {
 
 export default Decoration;
 
-useGLTF.preload("/models/decoration-transformed.glb");
+useGLTF.preload("/models/decoration.glb");

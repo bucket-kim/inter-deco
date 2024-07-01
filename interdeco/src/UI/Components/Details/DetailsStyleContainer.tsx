@@ -5,7 +5,7 @@ const DetailsStyleContainer = styled.div`
   top: 50%;
   left: 50%;
   z-index: 2;
-  width: 45rem;
+  max-width: 52rem;
   transform: translate(-50%, -50%);
   /* display: flex;
   align-items: center;
@@ -24,20 +24,17 @@ const DetailsStyleContainer = styled.div`
     sans-serif;
 
   .swiper {
-    height: 32rem;
-    width: 45rem;
+    height: 36rem;
+
     .container {
       display: inline-block;
       background: rgba(255, 255, 255, 0.1);
       border: 0.2rem white solid;
       border-radius: 1rem;
       backdrop-filter: blur(1rem);
-      height: 32rem;
-      width: 45rem;
+      height: 36rem;
+
       padding: 1rem;
-      /* margin: 1rem; */
-      position: relative;
-      white-space: wrap;
 
       .content-container {
         display: flex;
@@ -45,7 +42,7 @@ const DetailsStyleContainer = styled.div`
         align-items: center;
         justify-content: space-between;
         height: 100%;
-        width: 100%;
+        /* width: 100%; */
 
         h2 {
           width: 100%;
@@ -64,7 +61,7 @@ const DetailsStyleContainer = styled.div`
         }
 
         .img-container {
-          height: 20rem;
+          height: 24rem;
           width: 100%;
           border-radius: 1rem;
           overflow: hidden;

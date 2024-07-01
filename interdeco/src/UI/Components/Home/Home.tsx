@@ -14,7 +14,7 @@ const Home = () => {
 
   return (
     <HomeStyleContainer>
-      <h2 className="title">GOL-B RECORDs</h2>
+      {/* <h2 className="title">GOL-B RECORDs</h2> */}
       <nav>
         <div className="nav-login">
           {loggedIn ? (

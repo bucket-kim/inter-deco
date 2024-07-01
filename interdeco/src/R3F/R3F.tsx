@@ -3,6 +3,7 @@ import Blog from "./BlogModel/Blog";
 import Light from "./Light/Light";
 import Decoration from "./Mesh/Decoration/Decoration";
 import Mesh from "./Mesh/Mesh";
+import Texts from "./Mesh/Texts/Texts";
 import R3FStyleContainer from "./R3FStyleContainer";
 
 const R3F = () => {
@@ -21,6 +22,7 @@ const R3F = () => {
             <shadowMaterial transparent opacity={0.4} color={"#a72700"} />
           </mesh>
         </group>
+        <Texts />
         <Blog />
         <Mesh />
         <Decoration />

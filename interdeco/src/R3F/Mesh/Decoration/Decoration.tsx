@@ -1,6 +1,6 @@
 import { useGLTF } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
 import { decorationData } from "./config";
@@ -22,8 +22,10 @@ type GLTFResult = GLTF & {
 
 const Decoration = (props: JSX.IntrinsicElements["group"]) => {
   const { nodes } = useGLTF("/models/decoration.glb") as unknown as GLTFResult;
+  const { width: w } = useThree((state) => state.size);
 
   const groupRef = useRef<THREE.Group>(null);
+  const bushRef = useRef<THREE.Group>(null);
   const bowlRef = useRef<THREE.Group>(null);
   const flower001 = useRef<THREE.Group>(null);
   const flower002 = useRef<THREE.Group>(null);
@@ -41,7 +43,7 @@ const Decoration = (props: JSX.IntrinsicElements["group"]) => {
 
   useFrame((state) => {
     if (
-      !groupRef.current ||
+      !bushRef.current ||
       !bowlRef.current ||
       !flower001.current ||
       !flower002.current ||
@@ -55,11 +57,22 @@ const Decoration = (props: JSX.IntrinsicElements["group"]) => {
     flower002.current.rotation.z = Math.sin(time - 1.2) * 0.05 + 0.2;
     flower003.current.rotation.z = Math.sin(time - 1.4) * 0.05 + 0.2;
 
-    groupRef.current.children.map((child: any, key: number) => {
+    bushRef.current.children.map((child: any, key: number) => {
       child.rotation.z =
-        child.rotation.z + Math.sin(time - (key / 10 + 1)) * 0.005;
+        Math.cos(time - (key / 10 + 1)) * 0.005 + child.rotation.z;
     });
   });
+
+  useEffect(() => {
+    if (!groupRef.current) return;
+    if (w < 440) {
+      groupRef.current.position.x = 1.5;
+    } else if (w <= 1024) {
+      groupRef.current.position.x = 2;
+    } else {
+      groupRef.current.position.x = 3.5;
+    }
+  }, [w]);
 
   return (
     <group {...props} dispose={null}>
@@ -137,7 +150,7 @@ const Decoration = (props: JSX.IntrinsicElements["group"]) => {
           />
         </group>
       </group>
-      <group position={[-1.3, -2.55, 2]} scale={0.25} ref={groupRef}>
+      <group position={[-1.3, -2.55, 2]} scale={0.25} ref={bushRef}>
         {decorationData.map((data: any, key: number) => (
           <group
             key={key}

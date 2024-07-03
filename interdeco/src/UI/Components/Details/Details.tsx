@@ -12,11 +12,14 @@ import DetailsStyleContainer from "./DetailsStyleContainer";
 
 interface DetailsProps {
   datas: any;
+  isLoading: boolean;
 }
 
-const Details: FC<DetailsProps> = ({ datas }: any) => {
+const Details: FC<DetailsProps> = ({ datas, isLoading }) => {
   const [hovered, setHovered] = useState<number | null>(null);
   const readRef = useRef<(HTMLParagraphElement | null)[]>([]);
+
+  const detailsRef = useRef<HTMLDivElement>(null);
 
   const { setBlogId } = useGlobalState((state) => {
     return {
@@ -27,6 +30,17 @@ const Details: FC<DetailsProps> = ({ datas }: any) => {
   const handleClick = (post: any) => {
     setBlogId(post._id);
   };
+
+  useEffect(() => {
+    if (!detailsRef.current) return;
+    if (isLoading === false) {
+      gsap.to(detailsRef.current, {
+        visibility: "visible",
+        opacity: 1,
+        duration: 0.2,
+      });
+    }
+  }, [isLoading]);
 
   useEffect(() => {
     readRef.current.forEach((ref, idx: number) => {
@@ -106,7 +120,11 @@ const Details: FC<DetailsProps> = ({ datas }: any) => {
     );
   }, [datas]);
 
-  return <DetailsStyleContainer>{memoizeData}</DetailsStyleContainer>;
+  return (
+    <DetailsStyleContainer ref={detailsRef}>
+      {memoizeData}
+    </DetailsStyleContainer>
+  );
 };
 
 export default Details;

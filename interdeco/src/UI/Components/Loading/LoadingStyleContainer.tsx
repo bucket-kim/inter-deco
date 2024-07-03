@@ -6,6 +6,8 @@ const LoadingStyleContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 3;
+  opacity: 1;
+  visibility: visible;
   font-family:
     system-ui,
     -apple-system,

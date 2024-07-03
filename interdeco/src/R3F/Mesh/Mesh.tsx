@@ -38,6 +38,19 @@ const Mesh = ({ ...props }: any) => {
           />
         </Float>
       ))}
+      <Float
+        floatIntensity={1}
+        rotationIntensity={0.75}
+        // floatingRange={[1, 0.5]}
+      >
+        <Sphere
+          position={[6, -2, 0]}
+          castShadow
+          receiveShadow
+          scale={0.2}
+          material={material}
+        />
+      </Float>
     </group>
   );
 };

@@ -19,6 +19,7 @@ const UI = () => {
   }, shallow);
 
   const [posts, setPosts] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -26,9 +27,16 @@ const UI = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_API_URL}/api/posts`,
         );
+        if (response.status !== 200) {
+          setIsLoading(true);
+        } else {
+          console.log("GET DATA!");
+        }
         setPosts(response.data);
       } catch (error) {
         console.error("Error fetching posts:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -45,14 +53,9 @@ const UI = () => {
           <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
-      {!posts ? (
-        <Loading />
-      ) : (
-        <>
-          <Details datas={posts} />
-          <PopupDetail datas={posts} />
-        </>
-      )}
+      <Loading isLoading={isLoading} />
+      <Details datas={posts} isLoading={isLoading} />
+      <PopupDetail datas={posts} />
     </Fragment>
   );
 };

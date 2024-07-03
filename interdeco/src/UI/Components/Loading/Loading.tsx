@@ -1,8 +1,27 @@
 import gsap from "gsap";
-import { useEffect } from "react";
+import { FC, useEffect, useRef } from "react";
 import LoadingStyleContainer from "./LoadingStyleContainer";
 
-const Loading = () => {
+interface LoadingProps {
+  isLoading: boolean;
+}
+
+const Loading: FC<LoadingProps> = ({ isLoading }) => {
+  const loadingDivRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!loadingDivRef.current) return;
+    if (!isLoading) {
+      gsap.to(loadingDivRef.current, {
+        opacity: 0,
+        onComplete: () => {
+          if (!loadingDivRef.current) return;
+          loadingDivRef.current.style.visibility = "hidden";
+        },
+      });
+    }
+  }, [isLoading]);
+
   useEffect(() => {
     const spanTag = document.querySelectorAll("span");
     const dotTimeline = gsap.timeline({ paused: true });
@@ -25,7 +44,7 @@ const Loading = () => {
   }, []);
 
   return (
-    <LoadingStyleContainer>
+    <LoadingStyleContainer ref={loadingDivRef}>
       <p>
         Posts Loading
         {Array.from({ length: 3 }).map((_, key: number) => (

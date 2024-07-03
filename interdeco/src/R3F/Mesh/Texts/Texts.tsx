@@ -1,20 +1,9 @@
 import { Center, Text3D } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import { Group } from "three";
 
 const Texts = () => {
-  const { width: w } = useThree((state) => state.size);
   const groupRef = useRef<Group>(null);
-
-  // useEffect(() => {
-  //   if (!groupRef.current) return;
-  //   if (w < 440) {
-  //     groupRef.current.scale.set(0.3, 0.3, 0.3);
-  //   } else {
-  //     groupRef.current.scale.set(0.5, 0.5, 0.2);
-  //   }
-  // }, [w]);
 
   return (
     <group position={[0, 2.8, 0]} scale={[0.5, 0.5, 0.2]} ref={groupRef}>

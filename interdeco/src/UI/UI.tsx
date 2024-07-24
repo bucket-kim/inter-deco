@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
@@ -23,12 +23,19 @@ const UI = () => {
 
   const fetchPost = async () => {
     try {
-      await getDocs(collection(db, "posts")).then((snapshot) => {
+      const queryDoc = query(
+        collection(db, "posts"),
+        orderBy("createdAt", "desc"),
+      );
+
+      await getDocs(queryDoc).then((snapshot) => {
         const datas = snapshot.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
         }));
+
         // setBlogs(datas);
+
         setPosts(datas);
       });
     } catch (error) {

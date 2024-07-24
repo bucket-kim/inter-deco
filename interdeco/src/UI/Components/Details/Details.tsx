@@ -73,11 +73,6 @@ const Details: FC<DetailsProps> = ({ datas }) => {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >
-        {/* {Array.from({ length: 4 }).map((_: any, idx: number) => (
-          <SwiperSlide key={idx} className="container">
-            <div className="content-container"></div>
-          </SwiperSlide>
-        ))} */}
         {datas.map((post: any, idx: number) => (
           <SwiperSlide
             key={idx}

@@ -15,7 +15,7 @@ interface DetailsProps {
   isLoading: boolean;
 }
 
-const Details: FC<DetailsProps> = ({ datas, isLoading }) => {
+const Details: FC<DetailsProps> = ({ datas }) => {
   const [hovered, setHovered] = useState<number | null>(null);
   const readRef = useRef<(HTMLParagraphElement | null)[]>([]);
 

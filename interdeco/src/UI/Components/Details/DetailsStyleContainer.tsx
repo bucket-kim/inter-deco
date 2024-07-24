@@ -22,6 +22,7 @@ const DetailsStyleContainer = styled.div`
 
   .swiper {
     height: 36rem;
+    max-width: 52rem;
 
     .container {
       display: inline-block;

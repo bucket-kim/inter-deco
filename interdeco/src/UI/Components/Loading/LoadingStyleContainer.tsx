@@ -1,13 +1,18 @@
 import styled from "styled-components";
 
 const LoadingStyleContainer = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(#fed0be, #fbb2b4);
   z-index: 3;
   opacity: 1;
   visibility: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family:
     system-ui,
     -apple-system,
@@ -20,12 +25,23 @@ const LoadingStyleContainer = styled.div`
     "Open Sans",
     "Helvetica Neue",
     sans-serif;
+  color: white;
 
-  p {
-    margin: 0;
-    font-size: 1.5rem;
-    span {
-      margin: 0rem 0.15rem;
+  .loading-container {
+    .dot-container {
+      display: flex;
+      .dots {
+        background: #ffffff;
+        border-radius: 50%;
+        width: 2rem;
+        height: 2rem;
+        font-size: 4rem;
+        /* margin: auto; */
+        margin: 0rem 1rem;
+        box-shadow:
+          2px 2px 4px rgba(0, 0, 0, 0.1),
+          -2px -2px 4px rgba(255, 255, 255, 0.5);
+      }
     }
   }
 `;

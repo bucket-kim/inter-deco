@@ -12,7 +12,6 @@ import DetailsStyleContainer from "./DetailsStyleContainer";
 
 interface DetailsProps {
   datas: any;
-  isLoading: boolean;
 }
 
 const Details: FC<DetailsProps> = ({ datas }) => {
@@ -31,20 +30,6 @@ const Details: FC<DetailsProps> = ({ datas }) => {
     setBlogId(post.id);
   };
 
-  // useEffect(() => {
-  //   if (!detailsRef.current) return;
-  //   if (isLoading === false) {
-  //     gsap.fromTo(
-  //       detailsRef.current,
-  //       { scale: 0, transformOrigin: "center center" },
-  //       {
-  //         scale: 1,
-  //         duration: 0.3,
-  //       },
-  //     );
-  //   }
-  // }, [isLoading]);
-
   useEffect(() => {
     readRef.current.forEach((ref, idx: number) => {
       if (!ref) return;
@@ -60,16 +45,6 @@ const Details: FC<DetailsProps> = ({ datas }) => {
       <Swiper
         spaceBetween={10}
         navigation={true}
-        // loop={true}
-        // onSlideChange={(swiper) => {
-        //   setIsAnimating(true);
-        //   const timeout = setTimeout(() => {
-        //     setIsAnimating(false);
-        //     setActiveSlide(swiper.activeIndex);
-        //   }, 300);
-
-        //   return () => clearTimeout(timeout);
-        // }}
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >

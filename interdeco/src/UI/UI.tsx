@@ -7,6 +7,7 @@ import { db } from "../firebase/firebase";
 import { useGlobalState } from "../state/useGlobalState";
 import Details from "./Components/Details/Details";
 import Home from "./Components/Home/Home";
+import Loading from "./Components/Loading/Loading";
 import Login from "./Components/Login/Login";
 import NewPost from "./Components/NewPost/NewPost";
 import PopupDetail from "./Components/PopupDetail/PopupDetail";
@@ -19,7 +20,6 @@ const UI = () => {
   }, shallow);
 
   const [posts, setPosts] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   const fetchPost = async () => {
     try {
@@ -40,8 +40,6 @@ const UI = () => {
       });
     } catch (error) {
       console.log("Error fetching posts: ", error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -52,6 +50,7 @@ const UI = () => {
   return (
     <Fragment>
       {newPostShow && <NewPost />}
+      <Loading />
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -59,7 +58,7 @@ const UI = () => {
         </Routes>
       </Router>
 
-      <Details datas={posts} isLoading={isLoading} />
+      <Details datas={posts} />
       <PopupDetail datas={posts} />
     </Fragment>
   );

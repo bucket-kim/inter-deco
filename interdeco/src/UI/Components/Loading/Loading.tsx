@@ -1,40 +1,45 @@
+import { useProgress } from "@react-three/drei";
 import gsap from "gsap";
 import { FC, useEffect, useRef } from "react";
 import LoadingStyleContainer from "./LoadingStyleContainer";
 
-interface LoadingProps {
-  isLoading: boolean;
-}
-
-const Loading: FC<LoadingProps> = ({ isLoading }) => {
+const Loading: FC = () => {
   const loadingDivRef = useRef<HTMLDivElement>(null);
 
+  const { progress } = useProgress();
+
   useEffect(() => {
-    if (!loadingDivRef.current) return;
-    if (!isLoading) {
-      gsap.to(loadingDivRef.current, {
+    const dotContainer = document.querySelector(".dot-container");
+    if (progress >= 100) {
+      gsap.to(dotContainer, {
         opacity: 0,
         onComplete: () => {
-          if (!loadingDivRef.current) return;
-          loadingDivRef.current.style.visibility = "hidden";
+          gsap.to(loadingDivRef.current, {
+            delay: 0.5,
+            opacity: 0,
+            onComplete: () => {
+              if (!loadingDivRef.current) return;
+              loadingDivRef.current.style.visibility = "hidden";
+            },
+          });
         },
       });
     }
-  }, [isLoading]);
+  }, [progress]);
 
   useEffect(() => {
-    const spanTag = document.querySelectorAll("span");
+    const dotTag = document.querySelectorAll(".dots");
     const dotTimeline = gsap.timeline({ paused: true });
     dotTimeline
-      .to(spanTag, {
+      .to(dotTag, {
         stagger: 0.25,
         opacity: 0,
-        ease: "steps(1)",
+        ease: "power1.inOut",
       })
-      .to(spanTag, {
+      .to(dotTag, {
         opacity: 1,
         stagger: 0.25,
-        ease: "steps(1)",
+        ease: "power1.inOut",
       });
     dotTimeline.repeat(-1);
     dotTimeline.play();
@@ -45,12 +50,13 @@ const Loading: FC<LoadingProps> = ({ isLoading }) => {
 
   return (
     <LoadingStyleContainer ref={loadingDivRef}>
-      <p>
-        Posts Loading
-        {Array.from({ length: 3 }).map((_, key: number) => (
-          <span key={key}>.</span>
-        ))}
-      </p>
+      <div className="loading-container">
+        <div className="dot-container">
+          {Array.from({ length: 3 }).map((_, key: number) => (
+            <div className="dots" key={key} />
+          ))}
+        </div>
+      </div>
     </LoadingStyleContainer>
   );
 };

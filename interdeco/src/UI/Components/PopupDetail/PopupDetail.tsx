@@ -5,10 +5,10 @@ import { useGlobalState } from "../../../state/useGlobalState";
 import PopupDetailStyleContainer from "./PopupDetailStyleContainer";
 
 interface Post {
-  _id: string;
+  id: string;
   title: string;
   content: string;
-  imageUrl: string;
+  image: string;
   createdAt: string;
 }
 
@@ -27,7 +27,7 @@ const PopupDetail: FC<PopupDetailProps> = ({ datas }) => {
   const popupRef = useRef<HTMLDivElement>(null);
 
   const details = useMemo(() => {
-    return datas.find((post) => post._id.toString() === blogId || null);
+    return datas.find((post) => post.id.toString() === blogId || null);
   }, [blogId, datas]);
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const PopupDetail: FC<PopupDetailProps> = ({ datas }) => {
         </div>
         <div className="contents">
           <div className="img-container">
-            <img src={details.imageUrl} alt={details.title} />
+            <img src={details.image} alt={details.title} />
           </div>
           <div className="content-paragraph">
             <h1>{details.title}</h1>

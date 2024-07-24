@@ -7,4 +7,7 @@ export interface UIModuleTypes {
 
   episode: string;
   setEpisode: (episode: string) => void;
+
+  loginButton: boolean;
+  setLoginButton: (loginButton: boolean) => void;
 }

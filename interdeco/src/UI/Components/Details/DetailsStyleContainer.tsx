@@ -7,11 +7,6 @@ const DetailsStyleContainer = styled.div`
   z-index: 2;
   max-width: 52rem;
   transform: translate(-50%, -50%);
-  visibility: hidden;
-  opacity: 0;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
   font-family:
     system-ui,
     -apple-system,

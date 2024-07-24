@@ -28,19 +28,22 @@ const Details: FC<DetailsProps> = ({ datas, isLoading }) => {
   }, shallow);
 
   const handleClick = (post: any) => {
-    setBlogId(post._id);
+    setBlogId(post.id);
   };
 
-  useEffect(() => {
-    if (!detailsRef.current) return;
-    if (isLoading === false) {
-      gsap.to(detailsRef.current, {
-        visibility: "visible",
-        opacity: 1,
-        duration: 0.2,
-      });
-    }
-  }, [isLoading]);
+  // useEffect(() => {
+  //   if (!detailsRef.current) return;
+  //   if (isLoading === false) {
+  //     gsap.fromTo(
+  //       detailsRef.current,
+  //       { scale: 0, transformOrigin: "center center" },
+  //       {
+  //         scale: 1,
+  //         duration: 0.3,
+  //       },
+  //     );
+  //   }
+  // }, [isLoading]);
 
   useEffect(() => {
     readRef.current.forEach((ref, idx: number) => {
@@ -84,7 +87,7 @@ const Details: FC<DetailsProps> = ({ datas, isLoading }) => {
             <div className="content-container">
               <h2>{post.title}</h2>
               <div className="img-container">
-                <img src={post.imageUrl} alt={post.title} />
+                <img src={post.image} alt={post.title} />
               </div>
               {/* <p>
             {post.content.length > 30
@@ -102,15 +105,18 @@ const Details: FC<DetailsProps> = ({ datas, isLoading }) => {
                   read s'more
                 </p>
 
-                {/* <p>ID: {post.episode}</p> */}
-                <p>ID: {post._id.substring(19, 24)}</p>
+                <p>EP: {post.episode}</p>
+                {/* <p>ID: {post.id.substring(19, 24)}</p> */}
 
                 <small>
-                  {new Date(post.createdAt).toLocaleDateString(undefined, {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
+                  {new Date(post.createdAt.seconds * 1000).toLocaleDateString(
+                    undefined,
+                    {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    },
+                  )}
                 </small>
               </div>
             </div>

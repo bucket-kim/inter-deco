@@ -16,6 +16,11 @@ const UIModule = ({ set }: globalStateApiType) => {
     setEpisode: (episode: string) => {
       set({ episode: episode });
     },
+
+    loginButton: false,
+    setLoginButton: (loginButton: boolean) => {
+      set({ loginButton: loginButton });
+    },
   };
 };
 

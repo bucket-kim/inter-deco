@@ -59,7 +59,7 @@ const Decoration = (props: JSX.IntrinsicElements["group"]) => {
 
     bushRef.current.children.map((child: any, key: number) => {
       child.rotation.z =
-        Math.cos(time - (key / 10 + 1)) * 0.005 + child.rotation.z;
+        Math.cos(time - (key / 10 + 1)) * 0.001 + child.rotation.z;
     });
   });
 

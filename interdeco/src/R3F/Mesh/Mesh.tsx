@@ -1,5 +1,6 @@
 import { Float, Sphere } from "@react-three/drei";
 import * as THREE from "three";
+import { useGlobalState } from "../../state/useGlobalState";
 
 const Mesh = ({ ...props }: any) => {
   const material = new THREE.MeshStandardMaterial({
@@ -12,6 +13,12 @@ const Mesh = ({ ...props }: any) => {
     position: [number, number, number];
     scale: number;
   };
+
+  const { setLoginButton } = useGlobalState((state) => {
+    return {
+      setLoginButton: state.setLoginButton,
+    };
+  });
 
   const sphereObject: SphereObjectType[] = [
     { position: [-3.75, 0, 0.8], scale: 0.5 },
@@ -42,6 +49,9 @@ const Mesh = ({ ...props }: any) => {
         floatIntensity={1}
         rotationIntensity={0.75}
         // floatingRange={[1, 0.5]}
+        onClick={() => {
+          setLoginButton(true);
+        }}
       >
         <Sphere
           position={[6, -2, 0]}

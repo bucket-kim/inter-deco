@@ -1,12 +1,12 @@
-import axios from "axios";
+import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 import { shallow } from "zustand/shallow";
+import { db } from "../firebase/firebase";
 import { useGlobalState } from "../state/useGlobalState";
 import Details from "./Components/Details/Details";
 import Home from "./Components/Home/Home";
-import Loading from "./Components/Loading/Loading";
 import Login from "./Components/Login/Login";
 import NewPost from "./Components/NewPost/NewPost";
 import PopupDetail from "./Components/PopupDetail/PopupDetail";
@@ -21,26 +21,25 @@ const UI = () => {
   const [posts, setPosts] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_API_URL}/api/posts`,
-        );
-        if (response.status !== 200) {
-          setIsLoading(true);
-        } else {
-          console.log("GET DATA!");
-        }
-        setPosts(response.data);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const fetchPost = async () => {
+    try {
+      await getDocs(collection(db, "posts")).then((snapshot) => {
+        const datas = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        // setBlogs(datas);
+        setPosts(datas);
+      });
+    } catch (error) {
+      console.log("Error fetching posts: ", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    fetchPosts();
+  useEffect(() => {
+    fetchPost();
   }, []);
 
   return (
@@ -49,11 +48,10 @@ const UI = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-
           <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
-      <Loading isLoading={isLoading} />
+
       <Details datas={posts} isLoading={isLoading} />
       <PopupDetail datas={posts} />
     </Fragment>

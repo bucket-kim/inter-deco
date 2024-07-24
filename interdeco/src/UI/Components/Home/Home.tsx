@@ -5,10 +5,11 @@ import LogOut from "../Login/LogOut";
 import HomeStyleContainer from "./HomeStyleContainer";
 
 const Home = () => {
-  const { loggedIn, setNewPostShow } = useGlobalState((state) => {
+  const { loggedIn, setNewPostShow, loginButton } = useGlobalState((state) => {
     return {
       loggedIn: state.loggedIn,
       setNewPostShow: state.setNewPostShow,
+      loginButton: state.loginButton,
     };
   }, shallow);
 
@@ -25,9 +26,11 @@ const Home = () => {
               <LogOut />
             </>
           ) : (
-            <Link to={"/login"}>
-              <h2 className="login-button">Login</h2>
-            </Link>
+            loginButton && (
+              <Link to={"/login"}>
+                <h2 className="login-button">Login</h2>
+              </Link>
+            )
           )}
         </div>
       </nav>

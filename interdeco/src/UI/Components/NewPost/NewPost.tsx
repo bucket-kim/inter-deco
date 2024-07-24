@@ -1,6 +1,8 @@
-import axios from "axios";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useState } from "react";
 import { shallow } from "zustand/shallow";
+import { db, storage } from "../../../firebase/firebase";
 import { useGlobalState } from "../../../state/useGlobalState";
 import NewPostStyleContainer from "./NewPostStyleContainer";
 
@@ -21,39 +23,37 @@ const NewPost = () => {
     setImage(file);
   };
 
-  const handleSubmit = async (e: any) => {
+  const addPosts = async (e: any) => {
     e.preventDefault();
-    if (!image) return;
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("episode", episode);
-    formData.append("content", content);
-    formData.append("image", image);
-
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_API_URL}/api/post`,
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        },
-      );
-      console.log(response.data);
-      if (response.status === 201) {
-        setTitle("");
-        setEpisode("");
-        setContent("");
-        setImage(null);
-        setNewPostShow(false);
-      }
+      const storageRef = ref(storage, `images/${image.name}`);
+
+      const snapshot = await uploadBytes(storageRef, image);
+
+      const downloadURL = await getDownloadURL(snapshot.ref);
+
+      const postRef = await addDoc(collection(db, "posts"), {
+        title: title,
+        episode: episode,
+        content: content,
+        image: downloadURL,
+        createdAt: Timestamp.fromDate(new Date(Date.now())),
+      });
+
+      console.log("Document written with ID: ", postRef.id);
+      setTitle("");
+      setEpisode("");
+      setContent("");
+      setImage(null);
+      setNewPostShow(false);
     } catch (error) {
-      console.log(error);
+      console.log("Error : ", error);
     }
   };
 
   return (
     <NewPostStyleContainer>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={addPosts}>
         <input
           type="text"
           value={title}

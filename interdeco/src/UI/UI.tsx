@@ -9,6 +9,8 @@ import Details from "./Components/Details/Details";
 import Home from "./Components/Home/Home";
 import Loading from "./Components/Loading/Loading";
 import Login from "./Components/Login/Login";
+import MobileOrientation from "./Components/MobileView/MobileOrientation";
+import MobileView from "./Components/MobileView/MobileView";
 import NewPost from "./Components/NewPost/NewPost";
 import PopupDetail from "./Components/PopupDetail/PopupDetail";
 
@@ -20,6 +22,10 @@ const UI = () => {
   }, shallow);
 
   const [posts, setPosts] = useState<any[]>([]);
+
+  const orientation = MobileOrientation();
+
+  console.log(orientation);
 
   const fetchPost = async () => {
     try {
@@ -33,9 +39,6 @@ const UI = () => {
           ...doc.data(),
           id: doc.id,
         }));
-
-        // setBlogs(datas);
-
         setPosts(datas);
       });
     } catch (error) {
@@ -50,6 +53,7 @@ const UI = () => {
   return (
     <Fragment>
       {newPostShow && <NewPost />}
+      <MobileView />
       <Loading />
       <Router>
         <Routes>

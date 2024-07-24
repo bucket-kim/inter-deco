@@ -4,7 +4,7 @@ const DetailsStyleContainer = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
-  z-index: 2;
+  z-index: 1;
   max-width: 52rem;
   transform: translate(-50%, -50%);
   font-family:
@@ -102,21 +102,24 @@ const DetailsStyleContainer = styled.div`
   }
 
   @media only screen and (max-width: 844px) {
-    width: 21rem;
+    width: 20rem;
     .swiper {
-      height: 14.5rem;
+      height: 14rem;
 
       .container {
-        height: 14.5rem;
+        padding: 0.25rem;
+        height: 14rem;
 
         .content-container {
           h2 {
-            font-size: 1.25rem;
+            font-size: 1rem;
+            padding: 0.25rem 1rem;
           }
           .img-container {
             height: 22rem;
           }
           .footer-container {
+            padding: 0.25rem 1rem;
             p,
             small {
               font-size: 0.8rem;

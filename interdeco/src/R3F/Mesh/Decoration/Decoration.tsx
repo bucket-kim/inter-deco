@@ -68,7 +68,7 @@ const Decoration = (props: JSX.IntrinsicElements["group"]) => {
     if (w < 440) {
       groupRef.current.position.x = 1.5;
     } else if (w <= 1024) {
-      groupRef.current.position.x = 2;
+      groupRef.current.position.x = 3.5;
     } else {
       groupRef.current.position.x = 3.5;
     }

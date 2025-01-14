@@ -34,7 +34,7 @@ const PopupDetailStyleContainer = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #f5f5f5;
+    background: #ffffff;
     border: white 0.4rem solid;
     -webkit-box-shadow: 6px 6px 36px -20px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 6px 6px 36px -20px rgba(0, 0, 0, 0.75);
@@ -47,7 +47,7 @@ const PopupDetailStyleContainer = styled.div`
       align-items: center;
       justify-content: flex-start;
       padding: 0rem 1rem;
-      background: #392a5b;
+      background: #5997e3;
 
       button {
         border: none;
@@ -96,6 +96,7 @@ const PopupDetailStyleContainer = styled.div`
         color: #7d7d7d;
         font-size: 1rem;
         line-height: 2rem;
+        white-space: pre-wrap;
       }
     }
     /* transform: translate(-50%, -50%); */
